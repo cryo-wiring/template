@@ -54,6 +54,7 @@ control:
         type: filter
         filter_type: Eccosorb
         summary_label: Eccosorb
+    representative: true
   - line_id: C01
     qubit: Q01
     stages:
@@ -300,6 +301,7 @@ readout_send:
       Still: []
       CP: []
       MXC: []
+    representative: true
   - line_id: RS01
     qubits:
     - Q04
@@ -354,6 +356,7 @@ readout_return:
       Still: []
       CP: []
       MXC: []
+    representative: true
   - line_id: RR01
     qubits:
     - Q04

@@ -16,6 +16,7 @@ lines:
   - Q01
   - Q02
   - Q03
+  representative: true
   module: rr
   stages:
     CP:

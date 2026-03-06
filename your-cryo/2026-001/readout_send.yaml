@@ -13,6 +13,7 @@ lines:
   - Q01
   - Q02
   - Q03
+  representative: true
   module: rs
 - line_id: RS01
   qubits:

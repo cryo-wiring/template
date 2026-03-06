@@ -12,6 +12,7 @@ modules:
 lines:
 - line_id: C00
   qubit: Q00
+  representative: true
   module: ctrl
 - line_id: C01
   qubit: Q01
