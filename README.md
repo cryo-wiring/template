@@ -99,7 +99,7 @@ cryo-wiring validate anemone/2026/cd001/
         ├── cd001/               # First cooldown
         │   ├── metadata.yaml    # Cooldown metadata
         │   ├── chip.yaml        # Chip information
-        │   ├── components.yaml  # Component snapshot
+        │   ├── components.yaml  # Component catalog (frozen copy)
         │   ├── control.yaml     # Control line wiring
         │   ├── readout_send.yaml
         │   ├── readout_return.yaml
