@@ -1,4 +1,4 @@
-# cryo-wiring-template
+# cryowire-template
 
 A template repository for dilution refrigerator wiring configuration data.
 
@@ -58,17 +58,17 @@ rm -rf your-cryo/
 git add -A && git commit -m "Remove sample data" && git push
 ```
 
-### 4. Connect to cryo-wiring-app
+### 4. Connect to cryowire-app
 
-Launch the [cryo-wiring-app](https://github.com/cryo-wiring/app) Web UI with your repository:
+Launch the [cryowire-app](https://github.com/cryowire/app) Web UI with your repository:
 
 ```bash
 # Docker Compose (recommended)
 REPO_URL=https://github.com/<your-user>/<your-repo>.git docker compose up
 
 # Or with pip
-pip install cryo-wiring-app
-cryo-wiring-app --repo https://github.com/<your-user>/<your-repo>.git
+pip install cryowire-app
+cryowire-app --repo https://github.com/<your-user>/<your-repo>.git
 ```
 
 Open http://localhost:3000 and start creating cooldowns from the Web UI.
@@ -76,18 +76,18 @@ Open http://localhost:3000 and start creating cooldowns from the Web UI.
 ### 5. (Optional) Use the CLI
 
 ```bash
-pip install cryo-wiring-cli
+pip install cryowire-cli
 
-cryo-wiring new anemone --chip chip.yaml
-cryo-wiring build anemone/2026/cd001/
-cryo-wiring validate anemone/2026/cd001/
+cryowire new anemone --chip chip.yaml
+cryowire build anemone/2026/cd001/
+cryowire validate anemone/2026/cd001/
 ```
 
 ## Repository Structure
 
 ```
 <your-repo>/
-├── .cryo-wiring.yaml            # Project configuration
+├── .cryowire.yaml            # Project configuration
 ├── components.yaml              # Component catalog (master)
 ├── templates/                   # Module templates (customizable)
 │   ├── control_module.yaml
@@ -112,7 +112,7 @@ cryo-wiring validate anemone/2026/cd001/
 
 | Repository | Description |
 |---|---|
-| [cryo-wiring/spec](https://github.com/cryo-wiring/spec) | YAML format specification & schemas |
-| [cryo-wiring/core](https://github.com/cryo-wiring/core) | Python library (models, validation, diagram, builder) |
-| [cryo-wiring/cli](https://github.com/cryo-wiring/cli) | CLI tool |
-| [cryo-wiring/app](https://github.com/cryo-wiring/app) | Web UI (FastAPI + Next.js) |
+| [cryowire/spec](https://github.com/cryowire/spec) | YAML format specification & schemas |
+| [cryowire/core](https://github.com/cryowire/core) | Python library (models, validation, diagram, builder) |
+| [cryowire/cli](https://github.com/cryowire/cli) | CLI tool |
+| [cryowire/app](https://github.com/cryowire/app) | Web UI (FastAPI + Next.js) |

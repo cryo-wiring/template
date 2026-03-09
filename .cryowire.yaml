@@ -1,5 +1,5 @@
-# cryo-wiring project configuration
-# See: https://github.com/cryo-wiring/spec
+# cryowire project configuration
+# See: https://github.com/cryowire/spec
 
 # Path to template files (modules, metadata template, etc.)
 # Relative paths are resolved from this file's directory.
