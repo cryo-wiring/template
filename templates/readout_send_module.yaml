@@ -1,0 +1,6 @@
+readout_send_standard:
+  stages:
+    50K:
+    - XMA-10dB
+    4K:
+    - XMA-10dB

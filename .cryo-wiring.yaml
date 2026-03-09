@@ -1,0 +1,6 @@
+# cryo-wiring project configuration
+# See: https://github.com/cryo-wiring/spec
+
+# Path to template files (modules, metadata template, etc.)
+# Relative paths are resolved from this file's directory.
+template_path: ./templates
