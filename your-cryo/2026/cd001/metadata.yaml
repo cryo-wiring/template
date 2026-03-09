@@ -1,6 +1,6 @@
 cooldown_id: cd001
 date: "2026-01-15"
-fridge: your-cryo
+cryo: your-cryo
 operator: Alice
 purpose: Initial cooldown
 notes: |

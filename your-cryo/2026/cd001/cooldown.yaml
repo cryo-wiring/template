@@ -1,7 +1,7 @@
 metadata:
   cooldown_id: cd001
   date: '2026-01-15'
-  fridge: your-cryo
+  cryo: your-cryo
   operator: Alice
   purpose: Initial cooldown
   notes: 'Baseline wiring configuration for sample-8q.

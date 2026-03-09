@@ -1,6 +1,6 @@
 cooldown_id: cdNNN
 date: "YYYY-MM-DD"
-fridge: FRIDGE
+cryo: CRYO
 operator: ""
 purpose: ""
 notes: |

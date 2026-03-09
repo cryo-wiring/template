@@ -2,32 +2,88 @@
 
 A template repository for dilution refrigerator wiring configuration data.
 
-## Usage
+## Getting Started
 
-### 1. Create a repository
+### 1. Create your data repository
 
-Click the **"Use this template"** button on GitHub to create your own data repository.
+Click the **"Use this template"** button on GitHub to create your own repository.
 
-### 2. Add fridge data
+### 2. Customize for your lab
+
+#### Component catalog
+
+Edit `components.yaml` to define the RF/microwave parts used in your lab:
+
+```yaml
+XMA-10dB:
+  type: attenuator
+  manufacturer: XMA
+  model: XMA-2082-6431-10
+  value_dB: 10.0
+
+LNF-HEMT:
+  type: amplifier
+  manufacturer: LNF
+  model: LNF-LNC03_14A
+  amplifier_type: HEMT
+  gain_dB: 40.0
+```
+
+#### Module templates
+
+Edit files in `templates/` to define your standard wiring modules. These are the default component configurations applied to new cooldowns:
+
+```yaml
+# templates/control_module.yaml
+control_standard:
+  stages:
+    50K:
+    - XMA-10dB
+    4K:
+    - XMA-20dB
+    MXC:
+    - XMA-20dB
+```
+
+#### Metadata template
+
+Edit `templates/metadata.yaml` to set the default metadata template. Placeholders (`cdNNN`, `YYYY-MM-DD`, `CRYO`) are replaced automatically when creating a new cooldown.
+
+### 3. Remove sample data
+
+Delete the `your-cryo/` directory — it exists only as an example:
 
 ```bash
-# Set up with the cryo-wiring CLI
+rm -rf your-cryo/
+git add -A && git commit -m "Remove sample data" && git push
+```
+
+### 4. Connect to cryo-wiring-app
+
+Launch the [cryo-wiring-app](https://github.com/cryo-wiring/app) Web UI with your repository:
+
+```bash
+# Docker Compose (recommended)
+REPO_URL=https://github.com/<your-user>/<your-repo>.git docker compose up
+
+# Or with pip
+pip install cryo-wiring-app
+cryo-wiring-app --repo https://github.com/<your-user>/<your-repo>.git
+```
+
+Open http://localhost:3000 and start creating cooldowns from the Web UI.
+
+### 5. (Optional) Use the CLI
+
+```bash
 pip install cryo-wiring-cli
 
-# Create a new cooldown for a fridge
-cryo-wiring new --fridge my-fridge --chip chip.yaml
+cryo-wiring new anemone --chip chip.yaml
+cryo-wiring build anemone/2026/cd001/
+cryo-wiring validate anemone/2026/cd001/
 ```
 
-Or use the [cryo-wiring-app](https://github.com/orangekame3/cryo-wiring-app) Web UI:
-
-```bash
-pip install cryo-wiring-cli-app
-
-# Launch with this repository
-cryo-wiring-app serve --repo https://github.com/<your-user>/<your-repo>.git
-```
-
-### 3. Structure
+## Repository Structure
 
 ```
 <your-repo>/
@@ -38,74 +94,25 @@ cryo-wiring-app serve --repo https://github.com/<your-user>/<your-repo>.git
 │   ├── readout_send_module.yaml
 │   ├── readout_return_module.yaml
 │   └── metadata.yaml
-└── your-cryo/                   # Fridge directory
-    ├── current/                 # Working cooldown
-    │   ├── metadata.yaml
-    │   ├── chip.yaml
-    │   ├── components.yaml
-    │   ├── control.yaml
-    │   ├── readout_send.yaml
-    │   └── readout_return.yaml
-    └── 2026-001/                # Snapshot (frozen past cooldown)
-        ├── metadata.yaml
-        ├── chip.yaml
-        ├── components.yaml
-        ├── control.yaml
-        ├── readout_send.yaml
-        └── readout_return.yaml
+└── <cryo-name>/                 # Cryostat directory
+    └── <YYYY>/                  # Year group
+        ├── cd001/               # First cooldown
+        │   ├── metadata.yaml    # Cooldown metadata
+        │   ├── chip.yaml        # Chip information
+        │   ├── components.yaml  # Component snapshot
+        │   ├── control.yaml     # Control line wiring
+        │   ├── readout_send.yaml
+        │   ├── readout_return.yaml
+        │   └── cooldown.yaml    # Resolved bundle
+        └── cd002/               # Second cooldown
+            └── ...
 ```
 
-### 4. CI validation
+## Related Repositories
 
-Validation runs automatically when a PR is created. Errors are raised if wiring data violates the schema or contains inconsistencies.
-
-## Customization
-
-### Project configuration
-
-The `.cryo-wiring.yaml` file at the repository root configures project-level settings:
-
-```yaml
-# Path to template files (modules, metadata template, etc.)
-template_path: ./templates
-```
-
-When `template_path` is set, the CLI and app will use the templates in that directory instead of the built-in defaults. This lets you customize module definitions to match your lab's standard wiring configurations.
-
-### Module templates
-
-Edit files in the `templates/` directory to define your lab's standard wiring modules. For example, to add a filter to the standard control line template:
-
-```yaml
-# templates/control_module.yaml
-control_standard:
-  stages:
-    50K:
-    - XMA-10dB
-    4K:
-    - XMA-20dB
-    - LPF-KL          # added lab-standard filter
-    MXC:
-    - XMA-20dB
-```
-
-### Component catalog
-
-Define the components you use in `components.yaml`:
-
-```yaml
-XMA-10dB:
-  type: attenuator
-  model: XMA-2082-6431-10
-  value_dB: 10.0
-
-LNF-HEMT:
-  type: amplifier
-  model: LNF-LNC03_14A
-  amplifier_type: HEMT
-  gain_dB: 40.0
-```
-
-## Specification
-
-For details on the data format, see [cryo-wiring-spec](https://github.com/orangekame3/cryo-wiring-spec).
+| Repository | Description |
+|---|---|
+| [cryo-wiring/spec](https://github.com/cryo-wiring/spec) | YAML format specification & schemas |
+| [cryo-wiring/core](https://github.com/cryo-wiring/core) | Python library (models, validation, diagram, builder) |
+| [cryo-wiring/cli](https://github.com/cryo-wiring/cli) | CLI tool |
+| [cryo-wiring/app](https://github.com/cryo-wiring/app) | Web UI (FastAPI + Next.js) |
