@@ -12,7 +12,12 @@
 
 ### 1. Create your data repository
 
-Click the **"Use this template"** button on GitHub to create your own repository.
+Click the **"Use this template"** button on GitHub, or use the CLI:
+
+```bash
+pip install cryowire
+cryowire init ./my-data
+```
 
 ### 2. Customize for your lab
 
@@ -82,11 +87,11 @@ Open http://localhost:3000 and start creating cooldowns from the Web UI.
 ### 5. (Optional) Use the CLI
 
 ```bash
-pip install cryowire-cli
+pip install cryowire
 
-cryowire new anemone --chip chip.yaml
-cryowire build anemone/2026/cd001/
-cryowire validate anemone/2026/cd001/
+cryowire new your-cryo --qubits 8
+cryowire build your-cryo/2026/cd001/
+cryowire validate your-cryo/2026/cd001/
 ```
 
 ## Repository Structure
